@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "../api/axiosInstance";
+import BASE_URL from "../api/baseUrl";
 import "../Common.css";
 
 const Admin = () => {
@@ -140,7 +141,7 @@ const Admin = () => {
               <h3 style={{ fontSize: "1.3rem", marginBottom: "0.75rem" }}>{b.title}</h3>
               {b.image && (
                 <img 
-                  src={`http://localhost:5001/uploads/${b.image}`} 
+                  src={`${BASE_URL}/uploads/${b.image}`} 
                   alt={b.title} 
                   style={{ width: "100%", maxHeight: "200px", objectFit: "cover", borderRadius: "8px", marginBottom: "1rem" }}
                 />

@@ -1,0 +1,47 @@
+services:
+  # ── Backend (Node.js/Express) ─────────────────────────
+  - type: web
+    name: hackrust-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node src/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false          # Set manually in Render dashboard
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        fromService:
+          name: hackrust-frontend
+          type: web
+          property: host
+          prefix: https://
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: VIRUSTOTAL_API_KEY
+        sync: false
+      - key: GOOGLE_SAFE_BROWSING_API_KEY
+        sync: false
+
+  # ── Frontend (Vite/React) ─────────────────────────────
+  - type: web
+    name: hackrust-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: hackrust-backend
+          type: web
+          property: host
+          prefix: https://
+          suffix: /api
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

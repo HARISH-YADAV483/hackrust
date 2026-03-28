@@ -13,10 +13,14 @@ import BlogRoutes from "./routes/BlogRoutes.js";
 
 const app = express();
 
-// ✅ FIX: Allow frontend origin
+// ✅ Allow frontend origin (set FRONTEND_URL in Render env)
+const allowedOrigins = process.env.FRONTEND_URL
+  ? [process.env.FRONTEND_URL, "http://localhost:5173"]
+  : ["http://localhost:5173"];
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: allowedOrigins,
     credentials: true,
   })
 );

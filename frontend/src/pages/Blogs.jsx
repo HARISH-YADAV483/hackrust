@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "../api/axiosInstance";
+import BASE_URL from "../api/baseUrl";
 import "../Common.css";
 
 const Blogs = () => {
@@ -160,7 +161,7 @@ const BlogCard = ({ blog }) => {
       
       {blog.image && (
         <img 
-          src={`http://localhost:5001/uploads/${blog.image}`} 
+          src={`${BASE_URL}/uploads/${blog.image}`} 
           alt={blog.title} 
           style={{ 
             width: "100%", 

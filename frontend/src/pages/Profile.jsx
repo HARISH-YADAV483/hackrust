@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getProfile, uploadProfilePic } from "../api/userApi";
+import BASE_URL from "../api/baseUrl";
 import "../Common.css";
 
 const Profile = () => {
@@ -44,7 +45,7 @@ const Profile = () => {
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2rem" }}>
             <div style={{ position: "relative" }}>
               <img
-                src={user.profilePic ? `http://localhost:5001/uploads/${user.profilePic}` : "https://via.placeholder.com/150"}
+                src={user.profilePic ? `${BASE_URL}/uploads/${user.profilePic}` : "https://via.placeholder.com/150"}
                 width="150"
                 height="150"
                 alt="Profile"
