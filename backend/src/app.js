@@ -1,0 +1,51 @@
+import express from "express";
+import cors from "cors";
+import reportRoutes from "./routes/reportRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import path from "path";
+import adminRoutes from "./routes/adminRoutes.js";
+import scamRoutes from "./routes/scamRoutes.js";
+import leaderboardRoutes from "./routes/leaderboardRoutes.js";
+import simulatorRoutes from "./routes/simulatorRoutes.js";
+
+
+const app = express();
+
+// ✅ FIX: Allow frontend origin
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+
+// ✅ MUST be before routes
+app.use(express.json());
+
+// routes
+app.use("/api/reports", reportRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/uploads", express.static("uploads"));
+
+app.use("/api/admin", adminRoutes);
+
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+app.use("/api/scams", scamRoutes);
+// import bcrypt from "bcryptjs";
+
+// const run = async () => {
+//   const password = "asd";
+
+//   const hashed = await bcrypt.hash(password, 10);
+
+//   console.log("HASH:", hashed);
+// };
+
+// run();
+app.use("/api/leaderboard", leaderboardRoutes);
+app.use("/api/simulator", simulatorRoutes);
+export default app;
