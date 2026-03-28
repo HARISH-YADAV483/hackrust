@@ -50,7 +50,6 @@ const ReportScam = () => {
           <label>Scam Title</label>
           <input
             placeholder="e.g. Amazon Lottery SMS"
-            required
             onChange={(e) => setForm({ ...form, title: e.target.value })}
           />
         </div>
@@ -59,7 +58,6 @@ const ReportScam = () => {
           <label>Platform</label>
           <input
             placeholder="WhatsApp, UPI, Instagram..."
-            required
             onChange={(e) => setForm({ ...form, platform: e.target.value })}
           />
         </div>
@@ -68,7 +66,6 @@ const ReportScam = () => {
           <label>Scammer Detail</label>
           <input
             placeholder="Phone number, email, or username"
-            required
             onChange={(e) => setForm({ ...form, contact: e.target.value })}
           />
         </div>
@@ -85,7 +82,6 @@ const ReportScam = () => {
           <label>Detailed Description</label>
           <textarea
             placeholder="Explain how the scam happened or exactly what the message says in detail. This helps our AI provide a more accurate analysis..."
-            required
             rows="10"
             onChange={(e) => setForm({ ...form, description: e.target.value })}
           />
