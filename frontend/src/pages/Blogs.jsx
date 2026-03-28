@@ -51,7 +51,7 @@ const Blogs = () => {
   };
 
   return (
-    <div className="container-center" style={{ minHeight: "calc(100vh - 80px)", justifyContent: "flex-start", padding: "2rem" }}>
+    <div className="container-center" style={{ minHeight: "calc(100vh - 80px)", justifyContent: "flex-start", padding: "1.5rem 1rem" }}>
       <header className="auth-header" style={{ marginBottom: "3rem", textAlign: "center" }}>
         <h2>🤝 Community Blogs</h2>
         <p>Expert insights and security tips from our members</p>
@@ -123,8 +123,9 @@ const Blogs = () => {
         width: "100%", 
         maxWidth: "1200px", 
         display: "grid", 
-        gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))", 
-        gap: "2rem" 
+        gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))", 
+        gap: "1.5rem",
+        padding: "0 0.5rem"
       }}>
         {blogs.length === 0 ? (
           <p style={{ textAlign: "center", color: "var(--text-muted)", gridColumn: "1 / -1" }}>No blogs yet. Be the first to write one!</p>
