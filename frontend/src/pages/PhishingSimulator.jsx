@@ -70,19 +70,27 @@ const PhishingSimulator = () => {
   const currentQ = questions[currentIndex];
 
   return (
-    <div style={{ display: "flex", height: "calc(100vh - 80px)", overflow: "hidden" }}>
-      {/* 🔢 SIDEBAR: QUESTION MAP */}
-      <div style={{ width: "300px", background: "rgba(15, 23, 42, 0.8)", borderRight: "1px solid var(--glass-border)", padding: "1.5rem", overflowY: "auto" }}>
-        <h3 style={{ marginBottom: "1.5rem", fontSize: "1.1rem", color: "var(--primary)" }}>Simulation Map</h3>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.75rem" }}>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "calc(100vh - 80px)" }}>
+      {/* 🔢 QUESTION MAP — horizontal scroll on mobile, sidebar on desktop */}
+      <div style={{
+        background: "rgba(15, 23, 42, 0.8)",
+        borderBottom: "1px solid var(--glass-border)",
+        padding: "1rem 1.25rem",
+        overflowX: "auto",
+        WebkitOverflowScrolling: "touch",
+        flexShrink: 0
+      }}>
+        <h3 style={{ marginBottom: "0.75rem", fontSize: "0.95rem", color: "var(--primary)" }}>Simulation Map</h3>
+        <div style={{ display: "flex", gap: "0.5rem", minWidth: "max-content" }}>
           {questions.map((_, i) => (
             <button
               key={i}
               onClick={() => { setCurrentIndex(i); setResult(null); }}
               style={{
-                width: "100%", aspectRation: "1", borderRadius: "8px", border: "1px solid var(--glass-border)",
+                width: "40px", height: "40px", borderRadius: "8px",
+                border: "1px solid var(--glass-border)", flexShrink: 0,
                 background: i === currentIndex ? "var(--primary)" : "rgba(30, 41, 59, 0.6)",
-                color: "#fff", fontWeight: "700", cursor: "pointer"
+                color: "#fff", fontWeight: "700", cursor: "pointer", fontSize: "0.85rem"
               }}
             >
               {i + 1}
@@ -92,32 +100,33 @@ const PhishingSimulator = () => {
       </div>
 
       {/* 🧠 MAIN AREA: CONTENT */}
-      <div style={{ flexGrow: 1, padding: "2rem", overflowY: "auto", position: "relative" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
-          <h2 style={{ fontSize: "1.5rem" }}>{level.toUpperCase()} Simulation</h2>
-          <span style={{ color: "var(--text-muted)" }}>Question {currentIndex + 1} of {questions.length}</span>
+      <div style={{ flexGrow: 1, padding: "1.25rem", overflowY: "auto" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem", flexWrap: "wrap", gap: "0.5rem" }}>
+          <h2 style={{ fontSize: "1.3rem" }}>{level.toUpperCase()} Simulation</h2>
+          <span style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>Question {currentIndex + 1} of {questions.length}</span>
         </div>
 
-        <div className="card-glass" style={{ maxWidth: "none", marginBottom: "2rem" }}>
+        <div className="card-glass" style={{ maxWidth: "none", marginBottom: "1.5rem" }}>
           {currentQ.scenario && (
-            <div style={{ marginBottom: "2rem", background: "rgba(15, 23, 42, 0.5)", border: "1px solid var(--glass-border)", borderRadius: "12px", padding: "1.5rem" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "80px 1fr", gap: "0.5rem", fontSize: "0.9rem", color: "var(--text-muted)", marginBottom: "1rem" }}>
-                <span>From:</span> <span style={{ color: "#fff", fontWeight: "600" }}>{currentQ.scenario.senderName} ({currentQ.scenario.senderEmail})</span>
-                <span>Subject:</span> <span style={{ color: "var(--primary)", fontWeight: "600" }}>{currentQ.scenario.subject}</span>
+            <div style={{ marginBottom: "1.5rem", background: "rgba(15, 23, 42, 0.5)", border: "1px solid var(--glass-border)", borderRadius: "12px", padding: "1.25rem" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem", fontSize: "0.85rem", color: "var(--text-muted)", marginBottom: "1rem" }}>
+                <div><span>From: </span><span style={{ color: "#fff", fontWeight: "600" }}>{currentQ.scenario.senderName} ({currentQ.scenario.senderEmail})</span></div>
+                <div><span>Subject: </span><span style={{ color: "var(--primary)", fontWeight: "600" }}>{currentQ.scenario.subject}</span></div>
               </div>
-              <p style={{ lineHeight: "1.6", color: "#e2e8f0" }}>{currentQ.scenario.message}</p>
+              <p style={{ lineHeight: "1.6", color: "#e2e8f0", fontSize: "0.95rem" }}>{currentQ.scenario.message}</p>
             </div>
           )}
 
-          <h3 style={{ marginBottom: "1.5rem" }}>{currentQ.question}</h3>
+          <h3 style={{ marginBottom: "1.25rem", fontSize: "1.05rem" }}>{currentQ.question}</h3>
 
-          <div style={{ display: "grid", gap: "1rem" }}>
+          <div style={{ display: "grid", gap: "0.75rem" }}>
             {currentQ.options.map((opt, i) => (
               <button
                 key={i} onClick={() => handleAnswer(opt)} disabled={result !== null}
                 className="btn-primary"
-                style={{ 
-                  textAlign: "left", padding: "1rem 1.5rem", background: result ? (opt === result.correctAnswer ? "var(--success)" : "rgba(30, 41, 59, 0.6)") : "rgba(15, 23, 42, 0.6)",
+                style={{
+                  textAlign: "left", padding: "0.85rem 1.25rem", fontSize: "0.9rem",
+                  background: result ? (opt === result.correctAnswer ? "var(--success)" : "rgba(30, 41, 59, 0.6)") : "rgba(15, 23, 42, 0.6)",
                   border: "1px solid var(--glass-border)", opacity: result && opt !== result.correctAnswer ? 0.5 : 1
                 }}
               >
@@ -129,21 +138,21 @@ const PhishingSimulator = () => {
 
         {result && (
           <div className="card-glass" style={{ maxWidth: "none", background: result.isCorrect ? "rgba(16, 185, 129, 0.1)" : "rgba(239, 68, 68, 0.1)", borderColor: result.isCorrect ? "var(--success)" : "var(--error)" }}>
-            <h3 style={{ color: result.isCorrect ? "var(--success)" : "var(--error)", marginBottom: "1rem" }}>
+            <h3 style={{ color: result.isCorrect ? "var(--success)" : "var(--error)", marginBottom: "0.75rem", fontSize: "1.05rem" }}>
               {result.isCorrect ? "✅ Correct! Great eye." : "❌ This was a scam attempt."}
             </h3>
-            <p style={{ marginBottom: "1.5rem", lineHeight: "1.6" }}>{result.explanation}</p>
+            <p style={{ marginBottom: "1.25rem", lineHeight: "1.6", fontSize: "0.9rem" }}>{result.explanation}</p>
             
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "2rem" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1.5rem" }}>
               {result.redFlags.map((f, i) => (
                 <span key={i} style={{ background: "rgba(239, 68, 68, 0.2)", color: "#fca5a5", padding: "4px 10px", borderRadius: "20px", fontSize: "0.8rem" }}>🚩 {f}</span>
               ))}
             </div>
 
             {currentIndex < questions.length - 1 ? (
-              <button onClick={nextQuestion} className="btn-primary" style={{ width: "auto", px: "2rem" }}>Proceed to Next Question →</button>
+              <button onClick={nextQuestion} className="btn-primary" style={{ width: "100%" }}>Proceed to Next Question →</button>
             ) : (
-              <button onClick={() => navigate("/")} className="btn-primary" style={{ width: "auto", px: "2rem" }}>simulation Complete! Back Home</button>
+              <button onClick={() => navigate("/")} className="btn-primary" style={{ width: "100%" }}>Simulation Complete! Back Home</button>
             )}
           </div>
         )}
