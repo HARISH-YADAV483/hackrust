@@ -1,0 +1,201 @@
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-hero {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.brand-gradient {
+  background: linear-gradient(135deg, #ef4444, #991b1b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.home-logo {
+  height: 120px;
+  width: auto;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.3));
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.home-hero p {
+  font-size: 1.25rem;
+  color: #94a3b8;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1100px;
+  animation: fadeInUp 1s ease-out;
+}
+
+
+
+
+.feature-card {
+  background: #fff;
+  border-top: 3px solid #ef0505;
+  border-radius: 26px;
+  text-decoration: none;
+  color: #1a1a2e;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px -4px rgba(239, 68, 68, 0.2),
+    0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Diagonal red shimmer stripe */
+.feature-card::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  transition: transform 0.4s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 20px 48px -8px rgba(239, 68, 68, 0.38),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.feature-card:hover::after {
+  transform: scale(1.6);
+}
+
+/* ── Icon ─────────────────────────────────────────────── */
+.card-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.9rem;
+  margin: 1.75rem 1.75rem 1.1rem 1.75rem;
+  box-shadow: 0 6px 18px -4px rgba(0, 0, 0, 0.25),
+    0 0 0 4px rgba(239, 68, 68, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover .card-icon {
+  transform: rotate(-6deg) scale(1.1);
+}
+
+/* ── Text ─────────────────────────────────────────────── */
+.card-content {
+  flex-grow: 1;
+  text-align: left;
+  padding: 0 1.75rem 1.5rem 1.75rem;
+}
+
+.feature-card h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 0.45rem;
+  color: #111827;
+  letter-spacing: -0.3px;
+}
+
+.feature-card p {
+  color: #6b7280;
+  line-height: 1.65;
+  font-size: 0.88rem;
+  margin-bottom: 0;
+}
+
+/* ── Go Button ─────────────────────────────────────────── */
+.card-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+  padding: 0.9rem 1.5rem;
+  border-radius: 0 0 23px 23px;
+  transition: background 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.feature-card:hover .card-footer {
+  background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+  letter-spacing: 1.2px;
+}
+
+/* ── Arrow ─────────────────────────────────────────────── */
+.arrow {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.feature-card:hover .arrow {
+  transform: translateX(6px);
+}
+
+/* ── Animations ────────────────────────────────────────── */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}

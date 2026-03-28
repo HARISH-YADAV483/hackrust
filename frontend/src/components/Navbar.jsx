@@ -14,15 +14,25 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-brand">
-        ScamShield
+        <img src="/logo.png" alt="ScamShield" className="navbar-logo" />
       </Link>
 
       <div className="navbar-links">
+        <Link to="/leaderboard" className="nav-link">
+          Leaderboard
+        </Link>
+        
+        
         {user ? (
           <>
             <Link to="/profile" className="nav-link">
               Profile
             </Link>
+            {user.role === "admin" && (
+              <Link to="/admin" className="nav-link">
+                Admin
+              </Link>
+            )}
             <button onClick={handleLogout} className="logout-btn">
               Logout
             </button>

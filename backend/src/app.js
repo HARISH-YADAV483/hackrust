@@ -8,6 +8,7 @@ import adminRoutes from "./routes/adminRoutes.js";
 import scamRoutes from "./routes/scamRoutes.js";
 import leaderboardRoutes from "./routes/leaderboardRoutes.js";
 import simulatorRoutes from "./routes/simulatorRoutes.js";
+import BlogRoutes from "./routes/BlogRoutes.js";
 
 
 const app = express();
@@ -48,4 +49,5 @@ app.use("/api/scams", scamRoutes);
 // run();
 app.use("/api/leaderboard", leaderboardRoutes);
 app.use("/api/simulator", simulatorRoutes);
+app.use("/api/blogs", BlogRoutes);
 export default app;
