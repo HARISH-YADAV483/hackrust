@@ -1,5 +1,6 @@
 
 import Navbar from "./components/Navbar";
+import Bubbles from "./components/Bubbles";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -17,6 +18,7 @@ import Tools from "./pages/Tools";
 function App() {
   return (
     <>
+      <Bubbles />
       <Navbar />
 
       <Routes>

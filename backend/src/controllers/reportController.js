@@ -6,6 +6,7 @@ import { analyzeText } from "../services/aiService.js";
 import { extractTextFromImage } from "../services/ocrService.js";
 import { checkDomain } from "../services/domainService.js";
 import { getDomainAge } from "../services/whoisService.js";
+import { generateScamScore } from "../services/scamScoreService.js";
 
 export const createReport = async (req, res) => {
   try {
@@ -21,19 +22,28 @@ export const createReport = async (req, res) => {
     const fullText = (description + " " + extractedText).toLowerCase();
 
     // 🤖 AI analysis
-    let aiScore = 50; // fallback
     let aiData = {};
 
     try {
       const aiResult = await analyzeText(fullText);
-      aiData = JSON.parse(aiResult);
-      aiScore = aiData.score || 50;
+      aiData = JSON.parse(aiResult) || {};
     } catch (err) {
       console.log("⚠️ AI parsing failed, using fallback");
+      aiData = {};
     }
 
     // 🔍 Check scammer dataset
-    const scammer = await Scammer.findOne({ contact });
+    const cleanContact = (contact || "").trim();
+    console.log("🔍 Searching scammer DB for contact:", JSON.stringify(cleanContact));
+
+    // Case-insensitive, trimmed exact match
+    const scammer = cleanContact
+      ? await Scammer.findOne({
+          contact: { $regex: new RegExp(`^${cleanContact.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`, "i") },
+        })
+      : null;
+
+    console.log("🔍 Scammer match result:", scammer ? `FOUND → ${scammer.name || scammer.contact}` : "NOT FOUND");
     const isScammerMatch = !!scammer;
 
     // 🌐 Domain check
@@ -41,6 +51,8 @@ export const createReport = async (req, res) => {
 
     let vtMalicious = 0;
     let googleFlag = false;
+    let tldRisk = 0;
+    let tldFlag = null;
 
     if (domainResult?.vt?.data) {
       vtMalicious =
@@ -51,90 +63,51 @@ export const createReport = async (req, res) => {
       googleFlag = true;
     }
 
-    // 🚩 FLAG CATEGORIES
-    let textFlags = [...(aiData.redFlags || [])];
-    let urlFlags = [];
-    let otherFlags = [];
-    let greenFlags = [...(aiData.greenFlags || [])];
+    // Manual TLD check result (from domainService)
+    if (domainResult?.tld) {
+      tldRisk = domainResult.tld.tldRisk ?? 0;
+      tldFlag = domainResult.tld.flag ?? null;
+    }
 
-    let extraScore = 0;
-
-    //domain age 
+    // 📅 Domain age
     let domainAge = null;
-
-if (domain) {
-  domainAge = await getDomainAge(domain);
-
-  if (domainAge !== null && domainAge < 30) {
-    urlFlags.push("🚨 Domain is newly created (less than 3 months old)");
-    extraScore += 15;
-  }
-}
-
-    // 🔴 OTP DETECTION
-    if (fullText.includes("otp")) {
-      textFlags.push(
-        "⚠️ Asking for OTP — No legitimate app or website asks for OTP"
-      );
-      extraScore += 40;
+    if (domain) {
+      domainAge = await getDomainAge(domain);
     }
 
-    // 🔴 SCAMMER MATCH
-    if (isScammerMatch) {
-      otherFlags.push("🚨 Contact matches known scammer database");
-      extraScore += 40;
-    }
-
-
-    // 🔴 VIRUSTOTAL ENGINE FLAGS
-    if (vtMalicious > 0) {
-      urlFlags.push(
-        `🚨 ${vtMalicious} security engines flagged this domain as malicious`
-      );
-      extraScore += vtMalicious * 5;
-    }
-
-    // 🔴 GOOGLE SAFE BROWSING
-    if (googleFlag) {
-      urlFlags.push("🚨 Google Safe Browsing detected phishing/malware");
-      extraScore += 30;
-    }
-
-    // 🟢 GREEN FLAGS
-    if (!googleFlag && vtMalicious === 0 && domain) {
-      greenFlags.push("✅ Domain appears safe");
-    }
-
-    // 🎯 FINAL SCORE
-    const scamScore = Math.min(100, aiScore * 0.6 + extraScore);
-
-    // 📌 Next steps
-    const nextSteps = [
-      "Do not send money",
-      "Report to cybercrime portal",
-      "Block the contact",
-    ];
+    // 🎯 Run scoring engine
+    const scoreResult = generateScamScore({
+      aiData,
+      fullText,
+      vtMalicious,
+      googleFlag,
+      domainAge,
+      isScammerMatch,
+      hasDomain: !!domain,
+      tldRisk,
+      tldFlag,
+    });
 
     // 💾 Save report
     const report = await Report.create({
-  user: req.user._id,
-
-  title,
-  platform,
-
-  description,
-  contact,
-  domain,
-  extractedText,
-  scamScore,
-
-  textFlags,
-  urlFlags,
-  otherFlags,
-  greenFlags,
-
-  nextSteps,
-});
+      user: req.user._id,
+      title,
+      platform,
+      description,
+      contact,
+      domain,
+      extractedText,
+      scamScore: scoreResult.scamScore,
+      scammerAlert: scoreResult.scammerAlert,   // ⚠️ standalone high-alert flag
+      severity: scoreResult.severity,
+      confidence: scoreResult.confidence,
+      scamType: scoreResult.scamType,
+      textFlags: scoreResult.textFlags,
+      urlFlags: scoreResult.urlFlags,
+      otherFlags: scoreResult.otherFlags,
+      greenFlags: scoreResult.greenFlags,
+      nextSteps: scoreResult.nextSteps,
+    });
 
     // 👤 update user report count
     if (!req.user) {

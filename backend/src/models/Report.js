@@ -14,12 +14,28 @@ const reportSchema = new mongoose.Schema(
     extractedText: String,
 
     scamScore: Number,
+    scammerAlert: { type: Boolean, default: false },
     textFlags: [String],
 urlFlags: [String],
 otherFlags: [String],
 greenFlags: [String],
  
     nextSteps: [String],
+
+    severity: {
+      type: String,
+      enum: ["Safe", "Low Risk", "Moderate", "High Risk", "Critical"],
+      default: "Moderate",
+    },
+    confidence: {
+      type: String,
+      enum: ["low", "medium", "high"],
+      default: "low",
+    },
+    scamType: {
+      type: String,
+      default: "unknown",
+    },
 
     isVerified: {
       type: Boolean,

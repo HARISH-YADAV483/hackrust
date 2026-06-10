@@ -8,49 +8,49 @@ const Home = () => {
       description: "Submit a potential scam for deep AI analysis and security checks.",
       link: "/report",
       icon: "📢",
-      color: "linear-gradient(135deg, #ef4444, #b91c1c)",
+      color: "linear-gradient(135deg, #dc2626, #7f1d1d)",
     },
     {
       title: "Search Scams",
       description: "Search our database of verified scams to stay protected.",
       link: "/search",
       icon: "🔍",
-      color: "linear-gradient(135deg, #7f1d1d, #450a0a)",
+      color: "linear-gradient(135deg, #dc2626, #7f1d1d)",
     },
     {
       title: "Phishing Simulator",
       description: "Test your skills and learn how to identify phishing attempts.",
       link: "/simulator",
       icon: "🎯",
-      color: "linear-gradient(135deg, #ef4444, #991b1b)",
+      color: "linear-gradient(135deg, #dc2626, #7f1d1d)",
     },
     {
       title: "Hall of Heroes",
       description: "See how you rank against the community in our security leaderboard.",
       link: "/leaderboard",
       icon: "🏆",
-      color: "linear-gradient(135deg, #b91c1c, #7f1d1d)",
+      color: "linear-gradient(135deg, #dc2626, #7f1d1d)",
     },
     {
       title: "Blogs",
       description: "Read and share security insights from the community.",
       link: "/blogs",
       icon: "✍️",
-      color: "linear-gradient(135deg, #ef4444, #dc2626)",
+      color: "linear-gradient(135deg, #dc2626, #7f1d1d)",
     },
     {
       title: "Security Tools",
       description: "Check password strength and generate memorable strong passwords.",
       link: "/tools",
       icon: "🔐",
-      color: "linear-gradient(135deg, #7f1d1d, #b91c1c)",
+      color: "linear-gradient(135deg, #dc2626, #7f1d1d)",
     },
   ];
 
   return (
     <div className="home-container">
       <header className="home-hero">
-        <img src="/logo.png" alt="ScamShield" className="home-logo" />
+        <img src="/log2o.png" alt="ScamShield" className="home-logo" />
         <p>Your ultimate protection against digital scams, powered by AI.</p>
       </header>
 
@@ -63,10 +63,10 @@ const Home = () => {
             <div className="card-content">
               <h3>{card.title}</h3>
               <p>{card.description}</p>
-            </div>
-            <div className="card-footer">
-              <span>Go</span>
-              <span className="arrow">→</span>
+              <div className="explore-button">
+                <span>Explore More</span>
+                <span className="arrow">→</span>
+              </div>
             </div>
           </Link>
         ))}

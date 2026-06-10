@@ -48,15 +48,15 @@ const PhishingSimulator = () => {
       <div className="container-center">
         <div className="card-glass" style={{ maxWidth: "600px", textAlign: "center" }}>
           <header className="auth-header">
-            <h2>🎯 Phishing Simulator</h2>
+            <h2> Phishing Simulator</h2>
             <p>Select your training level to begin</p>
           </header>
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             <button onClick={() => startLevel("easy")} className="btn-primary">Easy Level</button>
-            <button onClick={() => startLevel("medium")} className="btn-primary" disabled={user?.simulator?.easyCompleted < 100} style={{ background: user?.simulator?.easyCompleted < 100 ? "#334155" : "linear-gradient(135deg, #a855f7, #7c3aed)" }}>
+            <button onClick={() => startLevel("medium")} className="btn-primary" disabled={user?.simulator?.easyCompleted < 100} style={{ background: user?.simulator?.easyCompleted < 100 ? "#334155" : "linear-gradient(135deg, #f7c655ff, #ed9c3aff)" }}>
               Medium Level {user?.simulator?.easyCompleted < 100 && "🔒"}
             </button>
-            <button onClick={() => startLevel("hard")} className="btn-primary" disabled={user?.simulator?.mediumCompleted < 50} style={{ background: user?.simulator?.mediumCompleted < 50 ? "#334155" : "linear-gradient(135deg, #ec4899, #be185d)" }}>
+            <button onClick={() => startLevel("hard")} className="btn-primary" disabled={user?.simulator?.mediumCompleted < 50} style={{ background: user?.simulator?.mediumCompleted < 50 ? "#334155" : "linear-gradient(135deg, #ec4848ff, #be1818ff)" }}>
               Hard Level {user?.simulator?.mediumCompleted < 50 && "🔒"}
             </button>
           </div>

@@ -1,19 +1,19 @@
 :root {
-  --bg: #0a0a0f;
-  --surface: rgba(18, 10, 20, 0.8);
+  --bg: #0a0a0a;
+  --surface: rgba(20, 5, 5, 0.85);
   --text: #ffffff;
-  --text-muted: #a3a3a3;
-  --primary: #ef4444;
-  --primary-hover: #dc2626;
-  --accent: #ffffff;
-  --accent-bg: rgba(239, 68, 68, 0.1);
-  --accent-border: rgba(239, 68, 68, 0.4);
+  --text-muted: #b0b0b0;
+  --primary: #dc2626;
+  --primary-hover: #b91c1c;
+  --accent: #ff4444;
+  --accent-bg: rgba(220, 38, 38, 0.1);
+  --accent-border: rgba(220, 38, 38, 0.4);
   --success: #22c55e;
   --warning: #f59e0b;
   --error: #ef4444;
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.08);
   --sans: 'Inter', system-ui, -apple-system, sans-serif;
-  
+
   font-family: var(--sans);
   background-color: var(--bg);
   color: var(--text);
@@ -30,11 +30,11 @@
 html, body {
   margin: 0;
   scroll-behavior: smooth;
-  background-color: var(--bg);
-  background-image:
-    radial-gradient(ellipse 80% 60% at 10% 0%, rgba(120, 10, 30, 0.45) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 90% 100%, rgba(60, 10, 80, 0.35) 0%, transparent 60%),
-    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(10, 8, 30, 0.9) 0%, transparent 100%);
+  background-color: #0a0a0a;
+   background-image: url('./assets/image copy.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
   overflow-x: hidden;
   min-height: 100%;
@@ -53,16 +53,16 @@ html, body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg);
+  background: #0a0a0a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(239, 68, 68, 0.3);
+  background: rgba(220, 38, 38, 0.45);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(239, 68, 68, 0.55);
+  background: rgba(220, 38, 38, 0.7);
 }
 
 h1, h2, h3, h4, h5, h6 {

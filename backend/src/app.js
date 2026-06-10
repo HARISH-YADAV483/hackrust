@@ -13,7 +13,7 @@ import BlogRoutes from "./routes/BlogRoutes.js";
 
 const app = express();
 
-// ✅ Allow frontend origin (set FRONTEND_URL in Render env)
+
 const allowedOrigins = process.env.FRONTEND_URL
   ? [process.env.FRONTEND_URL, "http://localhost:5173"]
   : ["http://localhost:5173"];
@@ -25,7 +25,7 @@ app.use(
   })
 );
 
-// ✅ MUST be before routes
+
 app.use(express.json());
 
 // routes

@@ -8,14 +8,15 @@
 }
 
 .card-glass {
-  background: rgba(30, 41, 59, 0.4);
+  background: rgba(20, 5, 5, 0.75);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.2);
   border-radius: 20px;
   padding: 2.5rem;
   width: 100%;
   max-width: 450px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7),
+              inset 0 1px 0 rgba(255, 80, 80, 0.08);
 }
 
 .auth-header {
@@ -26,7 +27,7 @@
 .auth-header h2 {
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #ef4444, #991b1b);
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -47,13 +48,13 @@
 .form-group label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #cbd5e1;
+  color: #e2e2e2;
 }
 
 .input-field {
   width: 100%;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 0, 0, 0.7);
+  border: 1px solid rgba(220, 38, 38, 0.25);
   padding: 0.8rem 1rem;
   border-radius: 10px;
   color: #fff;
@@ -64,12 +65,12 @@
 .input-field:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
 }
 
 .btn-primary {
   width: 100%;
-  background: linear-gradient(135deg, #ef4444, #991b1b);
+  background: linear-gradient(135deg, #26dc32, #1b9923);
   color: #fff;
   border: none;
   padding: 0.9rem;
@@ -78,11 +79,12 @@
   font-weight: 600;
   margin-top: 1rem;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 10px 20px rgba(220, 38, 38, 0.4);
 }
 
 .auth-footer {

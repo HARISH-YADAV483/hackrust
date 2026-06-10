@@ -190,7 +190,7 @@ const BlogCard = ({ blog }) => {
           style={{
             background: "none",
             border: "none",
-            color: "var(--primary-color, #ef4444)",
+            color: "var(--primary, #133b97)",
             cursor: "pointer",
             fontWeight: "bold",
             padding: "0.5rem 0",

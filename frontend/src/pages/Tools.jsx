@@ -85,7 +85,7 @@ const Tools = () => {
     return (
         <div className="container-center" style={{ gap: "2rem", alignItems: "flex-start", flexDirection: "row", flexWrap: "wrap", justifyContent: "center" }}>
             <div className="auth-header" style={{ width: "100%", textAlign: "center" }}>
-                <h2>🛡️ Security Tools</h2>
+                <h2> Security Tools</h2>
                 <p>Enhance your digital safety with our essential utilities</p>
             </div>
 

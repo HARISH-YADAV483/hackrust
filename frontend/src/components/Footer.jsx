@@ -3,18 +3,19 @@ const Footer = () => {
     <footer style={{
       textAlign: "center",
       padding: "1.25rem",
-      color: "#94a3b8",
+      color: "#b0b0b0",
       fontSize: "0.85rem",
-      borderTop: "1px solid rgba(255,255,255,0.08)",
-      background: "rgba(15, 23, 42, 0.6)",
+      borderTop: "1px solid rgba(242, 236, 236, 0.15)",
+      background: "rgba(8, 2, 2, 0.5)",
       backdropFilter: "blur(10px)",
     }}>
       Developed with Passion by{" "}
-      <strong style={{ color: "#ef4444" }}>Harish</strong> &amp;{" "}
-      <strong style={{ color: "#ef4444" }}>Raman</strong>{" "}
-      <span style={{ color: "#64748b" }}>(Adhyetarah)</span>
+      <strong style={{ color: "#ff6b6b" }}>Harish</strong> &amp;{" "}
+      <strong style={{ color: "#ff6b6b" }}>Komal</strong>{" "}
+      <span style={{ color: "#6b6b6b" }}>(Adhyetarah)</span>
     </footer>
   );
 };
 
 export default Footer;
+

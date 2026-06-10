@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-brand" onClick={closeMenu}>
-        <img src="/logo.png" alt="ScamShield" className="navbar-logo" />
+        <img src="/log2o.png" alt="ScamShield" className="navbar-logo" />
       </Link>
 
       {/* Hamburger button */}
